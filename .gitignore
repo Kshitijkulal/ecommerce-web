@@ -1,0 +1,67 @@
+﻿# Node.js
+node_modules/
+npm-debug.log
+
+# Environment variables
+.env
+
+# Log files
+logs/
+*.log
+*.log.*
+
+# Dependency lock files
+package-lock.json
+yarn.lock
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Directory for built JavaScript code
+dist/
+
+# Mac OS X
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+
+# IDEs and editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Docker Compose
+docker-compose.yml
+docker-compose.override.yml
+
+# Database
+*.sqlite
+
+# Testing
+coverage/
+nyc_output/
+
+# Visual Studio Code directories
+.vscode/
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# VSCode directories
+.vscode/
+.idea/
