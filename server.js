@@ -5,6 +5,7 @@ import body from 'body-Parser';
 import connectDB from './config/db.js';
 import morgan from 'morgan';
 import authRoutes from './routs/authRoute.js'
+import bodyParser from 'body-Parser';
 
 // config env
 env.config();
@@ -12,7 +13,7 @@ env.config();
 const app = express();
 const port = process.env.port || 8080;
 const hostName = `localhost`;
-
+app.use(bodyParser.json());
 // routes
 
 app.use(`/api/v1/auth`,authRoutes);
