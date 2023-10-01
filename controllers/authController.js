@@ -52,7 +52,7 @@ export const registerController = async (req, res) => {
         res.status(500).json({
             success: false,
             message: "Error in registration",
-            error: error.message,
+            error,
         });
     }
 };

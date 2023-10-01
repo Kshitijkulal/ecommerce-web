@@ -65,3 +65,4 @@ $RECYCLE.BIN/
 # VSCode directories
 .vscode/
 .idea/
+.env

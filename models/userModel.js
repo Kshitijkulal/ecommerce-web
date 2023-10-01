@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
     role:{
         type:Number,
         default:0
-    }
-},{timeseries:true});
+    },
+},{timestamps:true});
 
 export default mongoose.model('users',userSchema);
