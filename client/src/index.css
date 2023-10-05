@@ -1,0 +1,62 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Nav Bar css */
+.navbar{
+  font-size: 17px;
+  line-height: 26px;
+  text-transform: uppercase;
+}
+.nav-link{
+  font-weight: 300 !important;
+}
+.active{
+  border-bottom: 2px solid black;
+}
+.navbar-brand{
+  font-weight: 700;
+  font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  letter-spacing: 3px;
+}
+
+.footer a{
+  text-decoration: none;
+  color: whitesmoke;
+  padding: 10px;
+}
+.footer a:hover {
+  color: #ffebfb;
+  border-bottom: 1px solid #ffebfb;
+}
+.pnf{
+  display: flex;
+  min-height: 65vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.pnf-title{
+  font-size: 100px;
+  font-weight: 700;
+}
+.pnf-heading{
+  font-weight: normal;
+}
+.pnf-btn{
+  color: black;
+  border: 1px solid black;
+  padding: 10px;
+  margin-top: 10px;
+  text-decoration: none;
+}
+/* register page */
+.register{
+display: flex;
+align-items: center;
+height: 70px;
+flex-direction:column;
+}

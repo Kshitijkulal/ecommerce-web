@@ -6,7 +6,7 @@ import connectDB from './config/db.js';
 import morgan from 'morgan';
 import authRoutes from './routs/authRoute.js'
 import bodyParser from 'body-Parser';
-
+import cors from "cors";
 // config env
 env.config();
 
@@ -20,6 +20,12 @@ app.use(`/api/v1/auth`,authRoutes);
 
 //  middlewares
 
+app.use(cors({
+    origin:'http://localhost:3000',
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200,
+    allowedHeaders:"X-Requested-With, content-type",
+}));
 app.use(morgan('dev'));
 app.use(express.json());
 
