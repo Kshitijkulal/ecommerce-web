@@ -11,10 +11,44 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [address, setAddress] = useState("");
   const [address2, setAddress2] = useState("");
+  const [question, setQuestion] = useState("");
+  const [answer, setAnswer] = useState("");
   const [state, setState] = useState("");
   const [zip, setZip] = useState("");
   const fullAddress = `${address + address2}`;
   const navigate = useNavigate();
+// array of states
+const indianStates = [
+  "Andhra Pradesh",
+  "Arunachal Pradesh",
+  "Assam",
+  "Bihar",
+  "Chhattisgarh",
+  "Goa",
+  "Gujarat",
+  "Haryana",
+  "Himachal Pradesh",
+  "Jharkhand",
+  "Karnataka",
+  "Kerala",
+  "Madhya Pradesh",
+  "Maharashtra",
+  "Manipur",
+  "Meghalaya",
+  "Mizoram",
+  "Nagaland",
+  "Odisha",
+  "Punjab",
+  "Rajasthan",
+  "Sikkim",
+  "Tamil Nadu",
+  "Telangana",
+  "Tripura",
+  "Uttar Pradesh",
+  "Uttarakhand",
+  "West Bengal",
+];
+
   // form function
 
   const handleSubmit = async (event) => {
@@ -25,6 +59,8 @@ const Register = () => {
         email,
         password,
         fullAddress,
+        question,
+        answer
       });
       if (res.data.success) {
         toast.success(res.data.message);
@@ -137,19 +173,57 @@ const Register = () => {
               <label htmlFor="inputState" className="form-label">
                 State
               </label>
-              <select id="inputState" className="form-select">
-                <option
-                  selected
-                  value={state}
-                  onChange={(event) => {
-                    setState(event.target.value);
-                  }}
-                  required
-                >
-                  Choose...
-                </option>
-                <option>...</option>
+              <select
+                id="inputState"
+                className="form-select"
+                value={state}
+                onChange={(event) => {
+                  setState(event.target.value);
+                }}
+                required
+              >
+                <option value="">Choose...</option>
+                {indianStates.map((stateName) => (
+                  <option key={stateName} value={stateName}>
+                    {stateName}
+                  </option>
+                ))}
               </select>
+            </div>
+            <div className="col-md-4">
+            <label htmlFor="inputQuestion" className="form-label">
+                Question for Security
+              </label>
+              <select
+                id="inputQuestion"
+                className="form-select"
+                value={question} // Set the value to the selected question
+                onChange={(event) => {
+                  setQuestion(event.target.value); // Update the selected question
+                }}
+                required
+              >
+                <option value="">Choose...</option>
+                <option>What is your Mother's name ?</option>
+                <option>What is your Father's name ?</option>
+                <option>Where was your childhood spent ?</option>
+              </select>
+            </div>
+            <div className="col-md-8">
+              <label htmlFor="inputAnswer" className="form-label">
+                Answer
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="inputAnswer"
+                placeholder={`Answer to '${question}'`} // Use the selected question
+                value={answer}
+                onChange={(event) => {
+                  setAnswer(event.target.value);
+                }}
+                required
+              />
             </div>
             <div className="col-md-2">
               <label htmlFor="inputZip" className="form-label">
@@ -168,7 +242,7 @@ const Register = () => {
             </div>
             <div className="col-12">
               <button type="submit" className="btn btn-primary">
-                Sign in
+                Sign Up
               </button>
             </div>
           </form>

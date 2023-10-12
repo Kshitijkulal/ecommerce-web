@@ -1,9 +1,22 @@
 import { comparedPassword, hashPassword } from "../helpers/authHelper.js";
 import userModel from "../models/userModel.js";
 import  Jwt  from "jsonwebtoken";
+import cors from "cors";
+import express from "express";
+import { hash } from "bcrypt";
+
+const app = express();
+app.use(cors({
+    origin: 'http://192.168.56.1:3000', // Replace with the origin of your client app
+    credentials: true,
+    optionSuccessStatus: 200,
+    allowedHeaders: 'Content-Type, Authorization', // Add the required headers
+}));
+
 export const registerController = async (req, res) => {
+    
     try {
-        const { name, email, password, phone, address } = req.body; // Corrected req.body
+        const { name, email, password, phone, address, question,answer } = req.body; // Corrected req.body
         // validations
         if (!name) {
             return res.status(400).json({ message: "name is required" }); // Use return to prevent multiple responses
@@ -19,6 +32,12 @@ export const registerController = async (req, res) => {
         }
         if (!address) {
             return res.status(400).json({ message: "address is required" });
+        }
+        if (!question) {
+            return res.status(400).json({ message: "Question is required" });
+        }
+        if (!answer) {
+            return res.status(400).json({ message: "answer is required" });
         }
 
         // Check if the user already exists
@@ -38,7 +57,8 @@ export const registerController = async (req, res) => {
             email,
             password: hashedPassword,
             address,
-            phone,
+            question,
+            answer
         }).save();
         
 
@@ -92,6 +112,7 @@ export const loginController = async (req,res) => {
                 email: user.email,
                 phone: user.phone,
                 address: user.address,
+                role:user.role
             },
             token,
         });
@@ -104,6 +125,59 @@ export const loginController = async (req,res) => {
         });
     }
 };
+
+// post Forgot Password
+
+export const forgotPasswordController = async (req, res) => {
+    try {
+        const { email , question ,answer, newPassword } = req.body;
+        if(!email){
+            res.status(404).send({
+                message:`Email is required`,
+            });
+        }
+        if(!question){
+            res.status(404).send({
+                message:`Question is required`,
+            });
+        }
+        if(!answer){
+            res.status(404).send({
+                message:`Answer is required`,
+            });
+        }
+        if(!newPassword){
+            res.status(404).send({
+                message:`New Password is required`,
+            });
+        }
+        // check
+        const user = await userModel.findOne({email,question,answer});
+        // validation 
+        if(!user){
+            return res.status(404).send(
+                {
+                    success:false,
+                    message:`wrong Email or Answer`
+                }
+            )
+        }
+
+        const hashed = await hashPassword(newPassword);
+        await userModel.findByIdAndUpdate(user._id,{password:hashed});
+        res.status(200).send({
+            success:true,
+            message: `password Reset Successfully`,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(400).send({
+            success:false,
+            message:`Something went wrong`,
+            error
+        })
+    }
+}
 
 //  test controleer
 export const testController = async (req, res) =>{
