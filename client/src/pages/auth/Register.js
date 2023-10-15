@@ -15,7 +15,9 @@ const Register = () => {
   const [answer, setAnswer] = useState("");
   const [state, setState] = useState("");
   const [zip, setZip] = useState("");
-  const fullAddress = `${address + address2}`;
+  const [city, setCity] = useState("");
+  const fullAddress = address + ","  + address2 + "," + city + "," + state + "," +zip ;
+  console.log(fullAddress);
   const navigate = useNavigate();
 // array of states
 const indianStates = [
@@ -58,7 +60,7 @@ const indianStates = [
         name,
         email,
         password,
-        fullAddress,
+        address : fullAddress ,
         question,
         answer
       });
@@ -73,7 +75,6 @@ const indianStates = [
       toast.error(`Something went Wrong`);
     }
   };
-  console.log(process.env.REACT_APP_API);
   return (
     <Layout title={"Register to SewChic"}>
       <div classname="register">
@@ -87,7 +88,7 @@ const indianStates = [
               <input
                 type="text"
                 className="form-control"
-                id="inputEmail4"
+                id="inputName4"
                 value={name}
                 onChange={(event) => {
                   setName(event.target.value);
@@ -166,6 +167,10 @@ const indianStates = [
                 type="text"
                 className="form-control"
                 id="inputCity"
+                value={city}
+                onChange={(event) => {
+                  setCity(event.target.value);
+                }}
                 required
               />
             </div>

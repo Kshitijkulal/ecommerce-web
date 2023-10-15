@@ -4,13 +4,6 @@ import { loginController, registerController, testController, forgotPasswordCont
 import { requireSignIn , isAdmin} from '../middlewares/authMiddleware.js';
 const app = express();
 
-// router object
-app.use(cors({
-    origin: 'http://192.168.56.1:3000', // Replace with the origin of your client app
-    credentials: true,
-    optionSuccessStatus: 200,
-    allowedHeaders: 'Content-Type, Authorization', // Add the required headers
-}));
 const router = express.Router();
 
 router.post(`/register`,registerController);

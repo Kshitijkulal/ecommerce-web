@@ -16,7 +16,7 @@ app.use(cors({
 export const registerController = async (req, res) => {
     
     try {
-        const { name, email, password, phone, address, question,answer } = req.body; // Corrected req.body
+        const { name, email, password,  address, question,answer } = req.body; // Corrected req.body
         // validations
         if (!name) {
             return res.status(400).json({ message: "name is required" }); // Use return to prevent multiple responses
@@ -27,9 +27,9 @@ export const registerController = async (req, res) => {
         if (!password) {
             return res.status(400).json({ message: "password is required" });
         }
-        if (!phone) {
-            return res.status(400).json({ message: "phone number is required" });
-        }
+        // if (!phone) {
+        //     return res.status(400).json({ message: "phone number is required" });
+        // }
         if (!address) {
             return res.status(400).json({ message: "address is required" });
         }

@@ -60,3 +60,7 @@ align-items: center;
 height: 70px;
 flex-direction:column;
 }
+.product-link{
+  text-decoration: none !important;
+  color: black !important;
+}
