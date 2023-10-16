@@ -14,9 +14,9 @@ export const requireSignIn = async (req,res,next) => {
         req.user = decode;
         next();
 } catch (error) {
-        res.status(401).send(`${error}`);
+        console.log(error);
     }
-}
+};
 
 // admin access middleware
 

@@ -1,17 +1,10 @@
 import { comparedPassword, hashPassword } from "../helpers/authHelper.js";
 import userModel from "../models/userModel.js";
 import  Jwt  from "jsonwebtoken";
-import cors from "cors";
 import express from "express";
 import { hash } from "bcrypt";
 
 const app = express();
-app.use(cors({
-    origin: 'http://192.168.56.1:3000', // Replace with the origin of your client app
-    credentials: true,
-    optionSuccessStatus: 200,
-    allowedHeaders: 'Content-Type, Authorization', // Add the required headers
-}));
 
 export const registerController = async (req, res) => {
     
@@ -60,7 +53,6 @@ export const registerController = async (req, res) => {
             question,
             answer
         }).save();
-        
 
         res.status(201).send({
             success: true,
@@ -130,15 +122,10 @@ export const loginController = async (req,res) => {
 
 export const forgotPasswordController = async (req, res) => {
     try {
-        const { email , question ,answer, newPassword } = req.body;
+        const { email , answer, newPassword } = req.body;
         if(!email){
             res.status(404).send({
                 message:`Email is required`,
-            });
-        }
-        if(!question){
-            res.status(404).send({
-                message:`Question is required`,
             });
         }
         if(!answer){
@@ -152,7 +139,7 @@ export const forgotPasswordController = async (req, res) => {
             });
         }
         // check
-        const user = await userModel.findOne({email,question,answer});
+        const user = await userModel.findOne({email,answer});
         // validation 
         if(!user){
             return res.status(404).send(
